@@ -1,3 +1,4 @@
 constants.py
 *.pyc
 bot-env/
+logs.txt

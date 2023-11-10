@@ -28,10 +28,13 @@ async def on_message(message):
     timezone = pytz.timezone("America/Sao_Paulo")
     tempo = message.created_at
     tempo = tempo.astimezone(timezone)
-    tempo = tempo.strftime("%d/%m/%Y %H:%M:%S")
+    tempo = tempo.strftime("%d-%m-%Y %H:%M:%S")
 
-    with open('log.txt', 'a', encoding="utf-8") as arquivo:
-        arquivo.write(f"[{tempo}] {message.author}: {message.content}" + '\n')
+    with open('logs.txt', 'a', encoding="utf-8") as arquivo:
+        if message.attachments:
+            arquivo.write(f"[{tempo}] {message.author}: {message.attachments}" + '\n')
+        else:
+            arquivo.write(f"[{tempo}] {message.author}: {message.content}" + '\n')
 
     #Verifica se a mensagem é do próprio bot
     if message.author == client.user:
